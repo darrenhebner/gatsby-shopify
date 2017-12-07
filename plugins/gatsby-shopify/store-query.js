@@ -15,6 +15,21 @@ module.exports = `
                         publishedAt
                         updatedAt
                         vendor
+                        images(first: 10) {
+                            edges {
+                              node {
+                                src
+                                altText
+                              }
+                            }
+                        }
+                        variants(first: 10) {
+                            edges {
+                              node {
+                                price
+                              }
+                            }
+                        }
                     }
                 }
             }
