@@ -1,13 +1,24 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from 'react';
+import Link from 'gatsby-link';
 
-const IndexPage = () => (
-  <div>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
-  </div>
-)
+const IndexPage = ({data}) => (
+  <ul>
+    {data.allProducts.edges.map(({node}) => {
+      return <li>{node.title}</li>;
+    })}
+  </ul>
+);
 
-export default IndexPage
+export const query = graphql`
+  query allProducts {
+    allProducts {
+      edges {
+        node {
+          title
+        }
+      }
+    }
+  }
+`;
+
+export default IndexPage;
