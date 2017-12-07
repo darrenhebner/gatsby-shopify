@@ -5,6 +5,9 @@ export default ({ data }) => {
   return (
     <div className="article-show">
       <h1>{data.articles.title}</h1>
+      <em style={{ display: "block", margin: "0 0 1.25em 0" }}>
+        By {data.articles.author.firstName} {data.articles.author.LastName}
+      </em>
       <img src={data.articles.image.src} alt={data.articles.image.altText} />
       <p>{data.articles.content}</p>
 
@@ -21,6 +24,10 @@ export const query = graphql`
       image {
         altText
         src
+      }
+      author {
+        firstName
+        lastName
       }
     }
   }
