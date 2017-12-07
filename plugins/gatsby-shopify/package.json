@@ -1,0 +1,13 @@
+{
+  "name": "gatsby-shopify",
+  "description": "Gatsby plugin for Shopify",
+  "main": "gatsby-node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Darren Hebner & Loïc De Laubier",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^1.7.3"
+  }
+}
