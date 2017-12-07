@@ -4,7 +4,11 @@ import Link from 'gatsby-link';
 const IndexPage = ({data}) => (
   <ul>
     {data.allProducts.edges.map(({node}) => {
-      return <li>{node.title}</li>;
+      return (
+        <li>
+          {node.title} <Link to={`products/${node.handle}`}>View</Link>
+        </li>
+      );
     })}
   </ul>
 );
@@ -15,6 +19,7 @@ export const query = graphql`
       edges {
         node {
           title
+          handle
         }
       }
     }
