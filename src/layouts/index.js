@@ -2,36 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
+import Typography from 'typography';
+require('typeface-eczar');
+require('typeface-work-sans');
 
-import './index.css';
+const typography = new Typography({
+  baseFontSize: '14px',
+  baseLineHeight: 1.666,
+  headerFontFamily: ['eczar'],
+  bodyFontFamily: ['work sans']
+});
+
+typography.injectStyles();
+
+import './reset.css';
+import styles from './index.module.css';
 
 const Header = () => (
-  <div
-    style={{
-      background: 'rebeccapurple',
-      marginBottom: '1.45rem'
-    }}
-  >
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '1.45rem 1.0875rem'
-      }}
-    >
-      <h1 style={{margin: 0}}>
-        <Link
-          to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none'
-          }}
-        >
-          Gatsby
-        </Link>
-      </h1>
-    </div>
+  <div className={styles.header}>
+    <h1 className={styles.logo}>
+      <Link to="/">Gatsby Shop</Link>
+    </h1>
+
+    <ul className={styles.headerLinks}>
+      <Link to="/products">Products</Link>
+      <Link to="/articles">Articles</Link>
+    </ul>
   </div>
+);
+
+const Footer = () => (
+  <footer className={styles.footer}>View project on Github</footer>
 );
 
 const TemplateWrapper = ({children, data}) => (
@@ -43,16 +44,10 @@ const TemplateWrapper = ({children, data}) => (
         {name: 'keywords', content: 'sample, something'}
       ]}
     />
-    <Header />
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '0px 1.0875rem 1.45rem',
-        paddingTop: 0
-      }}
-    >
-      {children()}
+    <div className={styles.wrapper}>
+      <Header />
+      <div className={styles.content}>{children()}</div>
+      <Footer />
     </div>
   </div>
 );
