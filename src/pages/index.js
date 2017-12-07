@@ -1,12 +1,12 @@
-import React from "react";
-import Link from "gatsby-link";
+import React from 'react';
+import Link from 'gatsby-link';
 
-const IndexPage = ({ data }) => (
+const IndexPage = ({data}) => (
   <div className="index-page">
     <div className="top-sellers-products">
       <h2>Top Sellers</h2>
       <ul>
-        {data.allProducts.edges.map(({ node }) => {
+        {data.allProducts.edges.map(({node}) => {
           return (
             <li key={node.id}>
               {node.title} <Link to={`products/${node.handle}`}>View</Link>
@@ -18,7 +18,7 @@ const IndexPage = ({ data }) => (
     <div className="latest-articles">
       <h2>Latest Articles</h2>
       <ul>
-        {data.allArticles.edges.map(({ node }) => {
+        {data.allArticles.edges.map(({node}) => {
           return (
             <li key={node.id}>
               {node.title}&nbsp;
@@ -36,8 +36,8 @@ const IndexPage = ({ data }) => (
 function createHandleForTitle(title) {
   return title
     .toLowerCase()
-    .replace(/ /g, "-")
-    .replace(/[^\w-]+/g, "");
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '');
 }
 
 export const query = graphql`
