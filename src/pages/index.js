@@ -4,7 +4,7 @@ import Link from "gatsby-link";
 const IndexPage = ({ data }) => (
   <div className="index-page">
     <div className="top-sellers-products">
-      <h1>Top Sellers</h1>
+      <h2>Top Sellers</h2>
       <ul>
         {data.allProducts.edges.map(({ node }) => {
           return (
@@ -16,7 +16,7 @@ const IndexPage = ({ data }) => (
       </ul>
     </div>
     <div className="latest-articles">
-      <h1>Latest Articles</h1>
+      <h2>Latest Articles</h2>
       <ul>
         {data.allArticles.edges.map(({ node }) => {
           return (

@@ -1,17 +1,21 @@
 import React from "react";
 import Link from "gatsby-link";
 
+import styles from "./index.module.css";
+
 export default ({ data }) => {
   return (
     <div className="article-show">
-      <h1>{data.articles.title}</h1>
-      <em style={{ display: "block", margin: "0 0 1.25em 0" }}>
+      <h2 className={styles.article__title}>{data.articles.title}</h2>
+      <span className={styles.article__author}>
         By {data.articles.author.firstName} {data.articles.author.LastName}
-      </em>
+      </span>
       <img src={data.articles.image.src} alt={data.articles.image.altText} />
-      <p>{data.articles.content}</p>
+      <p className={styles.article__content}>{data.articles.content}</p>
 
-      <Link to={`/`}>Back</Link>
+      <Link to={`/`} className={styles.back}>
+        Back
+      </Link>
     </div>
   );
 };

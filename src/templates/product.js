@@ -1,20 +1,26 @@
 import React from "react";
 import Link from "gatsby-link";
 
+import styles from "./index.module.css";
+
 export default ({ data }) => {
   return (
     <div className="product-show">
-      <h1>{data.products.title}</h1>
+      <h2 className={styles.product__title}>{data.products.title}</h2>
 
-      <span>${data.products.variants.edges[0].node.price}</span>
+      <span className={styles.product__price}>
+        ${data.products.variants.edges[0].node.price}
+      </span>
 
       <img
-        style={{ maxWidth: "300px" }}
+        className={styles.product__image}
         src={data.products.images.edges[0].node.src}
       />
-      <p>{data.products.description}</p>
+      <p className={styles.product__description}>{data.products.description}</p>
 
-      <Link to={`/`}>Back</Link>
+      <Link to={`/`} className={styles.back}>
+        Back
+      </Link>
     </div>
   );
 };
