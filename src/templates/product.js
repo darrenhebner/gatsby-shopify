@@ -5,6 +5,9 @@ export default ({ data }) => {
   return (
     <div className="product-show">
       <h1>{data.products.title}</h1>
+
+      <span>${data.products.variants.edges[0].node.price}</span>
+
       <img
         style={{ maxWidth: "300px" }}
         src={data.products.images.edges[0].node.src}
@@ -25,6 +28,13 @@ export const query = graphql`
         edges {
           node {
             src
+          }
+        }
+      }
+      variants {
+        edges {
+          node {
+            price
           }
         }
       }
