@@ -1,10 +1,22 @@
 import React from "react";
 import Link from "gatsby-link";
+import Img from "gatsby-image";
 
 import styles from "./index.module.css";
 
 const IndexPage = ({ data }) => (
   <div className="index-page">
+    <div className={styles.hero}>
+      <Img
+        resolutions={data.heroImage.resolutions}
+        className={styles.heroImage}
+        alt="Gatsby Store"
+      />
+      <div className={styles.heroOverlay}>
+        <p>The best furniture for your house</p>
+      </div>
+    </div>
+
     <div className={styles.topSellers}>
       <h2>Top Sellers</h2>
       <ul>
@@ -60,7 +72,12 @@ function createHandleForTitle(title) {
 }
 
 export const query = graphql`
-  query allProducts {
+  query storeData {
+    heroImage: imageSharp(id: { regex: "/hero/" }) {
+      resolutions(width: 999, height: 450) {
+        ...GatsbyImageSharpResolutions_tracedSVG
+      }
+    }
     allProducts {
       edges {
         node {

@@ -1,3 +1,24 @@
+/* Hero */
+.hero {
+  position: relative;
+  margin-bottom: 2.5em;
+  padding: 1em;
+}
+
+.heroOverlay {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.heroOverlay p {
+  text-align: center;
+  font-size: 3em;
+  color: #fefefe;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+}
+
 /* Products */
 
 .topSellers ul {
