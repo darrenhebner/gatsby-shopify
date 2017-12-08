@@ -1,25 +1,34 @@
-import React from 'react';
-import Link from 'gatsby-link';
+import React from "react";
+import Link from "gatsby-link";
 
-const IndexPage = ({data}) => (
+import styles from "./index.module.css";
+
+const IndexPage = ({ data }) => (
   <div className="index-page">
-    <div className="top-sellers-products">
+    <div className={styles.topSellers}>
       <h2>Top Sellers</h2>
       <ul>
-        {data.allProducts.edges.map(({node}) => {
+        {data.allProducts.edges.map(({ node }) => {
           return (
             <li key={node.id}>
-              {node.title} <Link to={`products/${node.handle}`}>View</Link>
+              <img src={node.images.edges[0].node.src} />
+              <span className={styles.productName}>{node.title}</span>
+              <Link
+                className={styles.viewProduct}
+                to={`products/${node.handle}`}
+              >
+                View
+              </Link>
             </li>
           );
         })}
       </ul>
     </div>
-    <hr />
-    <div className="latest-articles">
+
+    <div className={styles.latestArticles}>
       <h2>Latest Articles</h2>
       <ul>
-        {data.allArticles.edges.map(({node}) => {
+        {data.allArticles.edges.map(({ node }) => {
           return (
             <li key={node.id}>
               {node.title}&nbsp;
@@ -37,8 +46,8 @@ const IndexPage = ({data}) => (
 function createHandleForTitle(title) {
   return title
     .toLowerCase()
-    .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '');
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
 }
 
 export const query = graphql`
@@ -49,6 +58,13 @@ export const query = graphql`
           id
           title
           handle
+          images {
+            edges {
+              node {
+                src
+              }
+            }
+          }
         }
       }
     }
