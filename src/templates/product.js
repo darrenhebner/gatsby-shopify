@@ -3,14 +3,7 @@ import Link from 'gatsby-link';
 import Img from 'gatsby-image';
 import styles from './index.module.css';
 
-<<<<<<< HEAD
-import styles from "./index.module.css";
-
-export default ({ data, shopifyClient }) => {
-=======
-export default ({data}) => {
-  console.log(data);
->>>>>>> adds optimized product images
+export default ({data, shopifyClient}) => {
   return (
     <div className="product-show">
       <h2 className={styles.product__title}>{data.products.title}</h2>
@@ -19,7 +12,6 @@ export default ({data}) => {
         ${data.products.variants.edges[0].node.price}
       </span>
 
-<<<<<<< HEAD
       <button
         id="buy-btn"
         className={styles.product__buy}
@@ -27,14 +19,6 @@ export default ({data}) => {
       >
         Buy Now
       </button>
-
-      <img
-=======
-      {/* <img
->>>>>>> adds optimized product images
-        className={styles.product__image}
-        src={data.products.images.edges[0].node.src}
-      /> */}
 
       <Img
         className={styles.product__image}
@@ -51,40 +35,40 @@ export default ({data}) => {
 };
 
 function handleBuyNow(product, shopifyClient) {
-  console.log("will buy ", product, shopifyClient);
+  console.log('will buy ', product, shopifyClient);
   setCheckoutLoading();
 
   shopifyClient.checkout
     .create()
     .then(checkout => {
-      const { id } = checkout;
+      const {id} = checkout;
       const lineItemsToAdd = [
-        { variantId: product.variants.edges[0].node.id, quantity: 1 }
+        {variantId: product.variants.edges[0].node.id, quantity: 1}
       ];
 
       // Add an item to the checkout
       shopifyClient.checkout.addLineItems(id, lineItemsToAdd).then(checkout => {
-        const { webUrl } = checkout;
+        const {webUrl} = checkout;
         // Redirect the user to the checkout URL
         window.location = webUrl;
       });
     })
     .catch(() => {
       resetCheckoutLoading();
-      alert("Something went wrong with the checkout. Try again later.");
+      alert('Something went wrong with the checkout. Try again later.');
     });
 }
 
 function setCheckoutLoading() {
-  const buyButton = document.querySelector("#buy-btn");
-  buyButton.innerHTML = "Loading...";
-  buyButton.style.cursor = "not-allowed";
+  const buyButton = document.querySelector('#buy-btn');
+  buyButton.innerHTML = 'Loading...';
+  buyButton.style.cursor = 'not-allowed';
 }
 
 function resetCheckoutLoading() {
-  const buyButton = document.querySelector("#buy-btn");
-  buyButton.innerHTML = "Buy Now";
-  buyButton.style.cursor = "default";
+  const buyButton = document.querySelector('#buy-btn');
+  buyButton.innerHTML = 'Buy Now';
+  buyButton.style.cursor = 'default';
 }
 
 export const query = graphql`
