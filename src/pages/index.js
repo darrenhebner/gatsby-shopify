@@ -11,7 +11,10 @@ const IndexPage = ({ data }) => (
         {data.allProducts.edges.map(({ node }) => {
           return (
             <li key={node.id}>
-              <img src={node.images.edges[0].node.src} />
+              <img
+                className={styles.productImage}
+                src={node.images.edges[0].node.src}
+              />
               <span className={styles.productName}>{node.title}</span>
               <Link
                 className={styles.viewProduct}
@@ -31,9 +34,15 @@ const IndexPage = ({ data }) => (
         {data.allArticles.edges.map(({ node }) => {
           return (
             <li key={node.id}>
-              {node.title}&nbsp;
-              <Link to={`articles/${createHandleForTitle(node.title)}`}>
-                View
+              <span className={styles.articleName}>{node.title}</span>
+              <span className={styles.articleAuthor}>
+                by&nbsp;{node.author.firstName}&nbsp;{node.author.lastName}
+              </span>
+              <Link
+                className={styles.readArticle}
+                to={`articles/${createHandleForTitle(node.title)}`}
+              >
+                Read
               </Link>
             </li>
           );
@@ -73,6 +82,10 @@ export const query = graphql`
         node {
           id
           title
+          author {
+            firstName
+            lastName
+          }
         }
       }
     }

@@ -1,9 +1,9 @@
-import React from 'react';
-import Link from 'gatsby-link';
+import React from "react";
+import Link from "gatsby-link";
 
-const ProductIndex = ({data}) => (
-  <ul>
-    {data.allProducts.edges.map(({node}) => (
+const ProductIndex = ({ data }) => (
+  <ul style={{ margin: 0 }}>
+    {data.allProducts.edges.map(({ node }) => (
       <li>
         {node.title} <Link to={`products/${node.handle}`}>View</Link>
       </li>

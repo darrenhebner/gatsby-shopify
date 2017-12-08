@@ -1,11 +1,11 @@
-import React from 'react';
-import Link from 'gatsby-link';
+import React from "react";
+import Link from "gatsby-link";
 
-const ArticleIndex = ({data}) => (
-  <ul>
-    {data.allArticles.edges.map(({node}) => (
+const ArticleIndex = ({ data }) => (
+  <ul style={{ margin: 0 }}>
+    {data.allArticles.edges.map(({ node }) => (
       <li>
-        {node.title}{' '}
+        {node.title}{" "}
         <Link to={`articles/${createHandleForTitle(node.title)}`}>View</Link>
       </li>
     ))}
@@ -15,8 +15,8 @@ const ArticleIndex = ({data}) => (
 function createHandleForTitle(title) {
   return title
     .toLowerCase()
-    .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '');
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
 }
 
 export const query = graphql`

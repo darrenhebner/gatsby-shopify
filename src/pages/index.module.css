@@ -1,3 +1,5 @@
+/* Products */
+
 .topSellers ul {
   display: flex;
   flex-wrap: wrap;
@@ -15,7 +17,7 @@
   width: calc(100%/6 - 0.75em);
 }
 
-.topSellers ul li img {
+.productImage {
   width: 100%;
   height: auto;
   margin-bottom: 1.5em;
@@ -35,6 +37,35 @@
   text-decoration: none;
 }
 
+/* Articles */
+
 .latestArticles {
   margin-top: 2em;
+}
+
+.latestArticles ul {
+  margin: 0;
+}
+
+.latestArticles ul li {
+  margin-bottom: 2.5em;
+}
+
+.articleName {
+  display: block;
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+.articleAuthor {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.readArticle {
+  display: inline-block;
+  margin-top: 0.5em;
+  border-bottom: 1px solid #565656;
+  padding-bottom: 0.3em;
+  text-decoration: none;
 }
