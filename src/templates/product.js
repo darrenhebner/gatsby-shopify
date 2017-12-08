@@ -1,9 +1,16 @@
-import React from "react";
-import Link from "gatsby-link";
+import React from 'react';
+import Link from 'gatsby-link';
+import Img from 'gatsby-image';
+import styles from './index.module.css';
 
+<<<<<<< HEAD
 import styles from "./index.module.css";
 
 export default ({ data, shopifyClient }) => {
+=======
+export default ({data}) => {
+  console.log(data);
+>>>>>>> adds optimized product images
   return (
     <div className="product-show">
       <h2 className={styles.product__title}>{data.products.title}</h2>
@@ -12,6 +19,7 @@ export default ({ data, shopifyClient }) => {
         ${data.products.variants.edges[0].node.price}
       </span>
 
+<<<<<<< HEAD
       <button
         id="buy-btn"
         className={styles.product__buy}
@@ -21,8 +29,16 @@ export default ({ data, shopifyClient }) => {
       </button>
 
       <img
+=======
+      {/* <img
+>>>>>>> adds optimized product images
         className={styles.product__image}
         src={data.products.images.edges[0].node.src}
+      /> */}
+
+      <Img
+        className={styles.product__image}
+        resolutions={data.productImage.resolutions}
       />
 
       <p className={styles.product__description}>{data.products.description}</p>
@@ -72,17 +88,15 @@ function resetCheckoutLoading() {
 }
 
 export const query = graphql`
-  query ProductQuery($handle: String!) {
-    products(handle: { eq: $handle }) {
+  query ProductQuery($handle: String!, $imageRegEx: String!) {
+    productImage: imageSharp(id: {regex: $imageRegEx}) {
+      resolutions(width: 300, height: 400) {
+        ...GatsbyImageSharpResolutions_tracedSVG
+      }
+    }
+    products(handle: {eq: $handle}) {
       title
       description
-      images {
-        edges {
-          node {
-            src
-          }
-        }
-      }
       variants {
         edges {
           node {
