@@ -26,6 +26,7 @@ module.exports = `
                         variants(first: 10) {
                             edges {
                               node {
+                                id
                                 price
                               }
                             }

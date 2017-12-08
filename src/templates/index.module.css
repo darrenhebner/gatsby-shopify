@@ -5,7 +5,21 @@
 .product__price {
   display: block;
   font-size: 1.25em;
-  margin: 0 0 1.5em 0;
+  margin: 0 0 1em 0;
+}
+
+.product__buy {
+  display: block;
+  margin: 0.8em 0 1.75em 0;
+  padding: 11px 28px;
+  background-color: white;
+  color: #5c6ac4;
+  border: 0.125em solid #5c6ac4;
+  box-shadow: none;
+}
+
+.product__buy:hover {
+  cursor: pointer;
 }
 
 .product__image {

@@ -15,6 +15,7 @@ const IndexPage = ({ data }) => (
         })}
       </ul>
     </div>
+    <hr />
     <div className="latest-articles">
       <h2>Latest Articles</h2>
       <ul>
