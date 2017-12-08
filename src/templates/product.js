@@ -1,9 +1,9 @@
-import React from "react";
-import Link from "gatsby-link";
-import Img from "gatsby-image";
-import styles from "./index.module.css";
+import React from 'react';
+import Link from 'gatsby-link';
+import Img from 'gatsby-image';
+import styles from './index.module.css';
 
-export default ({ data, shopifyClient }) => {
+export default ({data, shopifyClient}) => {
   return (
     <div className="product-show">
       <h2 className={styles.product__title}>{data.products.title}</h2>
@@ -40,44 +40,44 @@ function handleBuyNow(product, shopifyClient) {
   shopifyClient.checkout
     .create()
     .then(checkout => {
-      const { id } = checkout;
+      const {id} = checkout;
       const lineItemsToAdd = [
-        { variantId: product.variants.edges[0].node.id, quantity: 1 }
+        {variantId: product.variants.edges[0].node.id, quantity: 1}
       ];
 
       // Add an item to the checkout
       shopifyClient.checkout.addLineItems(id, lineItemsToAdd).then(checkout => {
-        const { webUrl } = checkout;
+        const {webUrl} = checkout;
         // Redirect the user to the checkout URL
         window.location = webUrl;
       });
     })
     .catch(() => {
       resetCheckoutLoading();
-      alert("Something went wrong with the checkout. Try again later.");
+      alert('Something went wrong with the checkout. Try again later.');
     });
 }
 
 function setCheckoutLoading() {
-  const buyButton = document.querySelector("#buy-btn");
-  buyButton.innerHTML = "Loading...";
-  buyButton.style.cursor = "not-allowed";
+  const buyButton = document.querySelector('#buy-btn');
+  buyButton.innerHTML = 'Loading...';
+  buyButton.style.cursor = 'not-allowed';
 }
 
 function resetCheckoutLoading() {
-  const buyButton = document.querySelector("#buy-btn");
-  buyButton.innerHTML = "Buy Now";
-  buyButton.style.cursor = "default";
+  const buyButton = document.querySelector('#buy-btn');
+  buyButton.innerHTML = 'Buy Now';
+  buyButton.style.cursor = 'default';
 }
 
 export const query = graphql`
   query ProductQuery($handle: String!, $imageRegEx: String!) {
-    productImage: imageSharp(id: { regex: $imageRegEx }) {
-      resolutions(width: 300, height: 400) {
+    productImage: imageSharp(id: {regex: $imageRegEx}) {
+      resolutions(width: 300, height: 300) {
         ...GatsbyImageSharpResolutions_tracedSVG
       }
     }
-    products(handle: { eq: $handle }) {
+    products(handle: {eq: $handle}) {
       title
       description
       variants {
