@@ -1,10 +1,10 @@
-import React from "react";
-import Link from "gatsby-link";
-import Img from "gatsby-image";
+import React from 'react';
+import Link from 'gatsby-link';
+import Img from 'gatsby-image';
 
-import styles from "./index.module.css";
+import styles from './index.module.css';
 
-const IndexPage = ({ data }) => (
+const IndexPage = ({data}) => (
   <div className="index-page">
     <div className={styles.hero}>
       <Img
@@ -20,12 +20,17 @@ const IndexPage = ({ data }) => (
     <div className={styles.topSellers}>
       <h2>Top Sellers</h2>
       <ul>
-        {data.allProducts.edges.map(({ node }) => {
+        {data.allProducts.edges.map(({node}) => {
+          const imageForProduct = getProductImage(
+            node.handle,
+            data.productImages
+          );
+
           return (
             <li key={node.id}>
-              <img
+              <Img
+                resolutions={imageForProduct.node.resolutions}
                 className={styles.productImage}
-                src={node.images.edges[0].node.src}
               />
               <span className={styles.productName}>{node.title}</span>
               <Link
@@ -43,7 +48,7 @@ const IndexPage = ({ data }) => (
     <div className={styles.latestArticles}>
       <h2>Latest Articles</h2>
       <ul>
-        {data.allArticles.edges.map(({ node }) => {
+        {data.allArticles.edges.map(({node}) => {
           return (
             <li key={node.id}>
               <span className={styles.articleName}>{node.title}</span>
@@ -64,16 +69,32 @@ const IndexPage = ({ data }) => (
   </div>
 );
 
+function getProductImage(handle, images) {
+  return images.edges.find(img => {
+    return img.node.id.includes(handle);
+  });
+}
+
 function createHandleForTitle(title) {
   return title
     .toLowerCase()
-    .replace(/ /g, "-")
-    .replace(/[^\w-]+/g, "");
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '');
 }
 
 export const query = graphql`
-  query storeData {
-    heroImage: imageSharp(id: { regex: "/hero/" }) {
+  query allProducts {
+    productImages: allImageSharp {
+      edges {
+        node {
+          id
+          resolutions(width: 300, height: 300) {
+            ...GatsbyImageSharpResolutions_tracedSVG
+          }
+        }
+      }
+    }
+    heroImage: imageSharp(id: {regex: "/hero/"}) {
       resolutions(width: 999, height: 450) {
         ...GatsbyImageSharpResolutions_tracedSVG
       }
